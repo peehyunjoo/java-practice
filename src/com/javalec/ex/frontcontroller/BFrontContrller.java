@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javalec.ex.command.BCommand;
+import com.javalec.ex.command.BContentCommand;
+import com.javalec.ex.command.BDeleteCommand;
 import com.javalec.ex.command.BListCommand;
 import com.javalec.ex.command.BModifyCommand;
 import com.javalec.ex.command.BWriteCommand;
@@ -72,16 +74,19 @@ public class BFrontContrller extends HttpServlet {
 			command  = new BListCommand();
 			command.execute(request, response);
 			viewPage = "index.jsp";
-		}/*else if(com.equals("/content_view.do")){
+		}else if(com.equals("/content_view.do")){
 			command = new BContentCommand();
 			command.execute(request, response);
 			viewPage = "content_view.jsp";
-		}*/else if(com.equals("/modify.do")){
+		}else if(com.equals("/modify.do")){
 			command = new BModifyCommand();
 			command.execute(request, response);
 			viewPage = "list.do";
+		}else if(com.equals("/delete.do")){
+			command = new BDeleteCommand();
+			command.execute(request, response);
+			viewPage = "list.do";
 		}
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

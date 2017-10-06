@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,14 +22,20 @@
 		    </tr>
   		</thead>
   		<tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@gg</td>
-		    </tr>
+		    <c:forEach items="${list}" var="dto">
+				<tr>
+					<th scope="row">
+						<a href="content_view.do?bid=${dto.bid}">${dto.bid}</a></th>
+					<td>${dto.bName}</td>
+					<td>${dto.bTitle}</td>
+					<td>${dto.bContent}</td>
+				</tr>
+		</c:forEach>
   		</tbody>
 	</table>
+	<div class="row justify-content-center">
+  		<a href="write_view.do"><button type="button" class="btn btn-outline-dark">±€¿€º∫</button></a>
+	</div>
 </div>
 </body>
 </html>

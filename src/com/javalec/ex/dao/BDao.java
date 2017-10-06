@@ -70,7 +70,7 @@ public class BDao {
 				e.printStackTrace();
 			}
 		}	
-		return null;
+		return dtos;
 	}
 	
 	public void write(String bName, String bTitle, String bContent){
@@ -101,27 +101,27 @@ public class BDao {
 		}
 		
 	}
-	
-	public BDto contentView(){
+
+	public BDto contentView(int id){
 		ArrayList<BDto> dtos = new ArrayList<BDto>();
-		//Connection connection = null;
-		// http:// ~~~ /detail.do?bid=3
+		System.out.println("content_view");
 		try{
 			
 			String query = "select * from board where = ?";
 			ps = connection.prepareStatement(query);
-		//	ps.setString(1,Integer.parseInt(bid));
+			ps.setInt(1,id);
 			rs = ps.executeQuery();
 		
-			while(rs.next()){
-				int bid = rs.getInt("bid");
+			//while(rs.next()){
+				
+				int bid = rs.getInt("id");
 				String bTitle = rs.getString("bTitle");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
 				Timestamp bDate = rs.getTimestamp("bDate");
 				BDto dto = new BDto(bid,bName,bTitle,bContent,bDate);
 				dtos.add(dto);
-			}
+			//}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -134,6 +134,7 @@ public class BDao {
 			}
 		}	
 		return dtos.get(0);
+		//return dtos;
 	}
 	
 	public void modify(String bid, String bName, String bTitle,String bContent){
@@ -162,6 +163,26 @@ public class BDao {
 		}
 		
 	}
+	
+	public void delete(String bid){
+		try{
+			//connection = dataSource.getConnection();
+			String query = "delete from board where bid= ?";
+			ps = connection.prepareStatement(query);
+			ps.setInt(1,Integer.parseInt(bid));
+			int rn = ps.executeUpdate();
+		}catch(Exception e){
+				e.printStackTrace();
+		}finally{
+			try{
+				/*if(PreparedStatement != null) PreparedStatement.close();*/
+				if(connection != null) connection.close();
+			}catch(Exception e2){
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 }
 
 	
