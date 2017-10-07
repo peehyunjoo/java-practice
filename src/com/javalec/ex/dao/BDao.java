@@ -103,25 +103,26 @@ public class BDao {
 	}
 
 	public BDto contentView(int id){
+		System.out.println("id"+id);
 		ArrayList<BDto> dtos = new ArrayList<BDto>();
 		System.out.println("content_view");
 		try{
 			
-			String query = "select * from board where = ?";
+			String query = "select * from board where bid = ?";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1,id);
 			rs = ps.executeQuery();
 		
-			//while(rs.next()){
+			while(rs.next()){
 				
-				int bid = rs.getInt("id");
+				int bid = rs.getInt("bid");
 				String bTitle = rs.getString("bTitle");
 				String bName = rs.getString("bName");
 				String bContent = rs.getString("bContent");
 				Timestamp bDate = rs.getTimestamp("bDate");
 				BDto dto = new BDto(bid,bName,bTitle,bContent,bDate);
 				dtos.add(dto);
-			//}
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
