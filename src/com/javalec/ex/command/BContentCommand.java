@@ -10,8 +10,7 @@ public class BContentCommand implements BCommand{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response){
 		
-		String id = request.getParameter("bid");
-		int bid = Integer.parseInt(id);
+		int bid = Integer.parseInt(request.getParameter("bid")); 
 		BDao dao = new BDao();
 		BDto dto = dao.contentView(bid);
 		

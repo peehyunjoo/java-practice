@@ -94,7 +94,13 @@ public class BDao {
 		}finally{
 			try{
 				/*if(PreparedStatement != null) PreparedStatement.close();*/
-				if(connection != null) connection.close();
+				try{
+					if(rs != null) rs.close();
+					if(ps != null) ps.close();
+					if(connection != null) connection.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}catch(Exception e2){
 				e2.printStackTrace();
 			}
@@ -156,10 +162,11 @@ public class BDao {
 				e.printStackTrace();
 		}finally{
 			try{
-				/*if(PreparedStatement != null) PreparedStatement.close();*/
+				if(rs != null) rs.close();
+				if(ps != null) ps.close();
 				if(connection != null) connection.close();
-			}catch(Exception e2){
-				e2.printStackTrace();
+			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 		
@@ -176,14 +183,14 @@ public class BDao {
 				e.printStackTrace();
 		}finally{
 			try{
-				/*if(PreparedStatement != null) PreparedStatement.close();*/
-				if(connection != null) connection.close();
-			}catch(Exception e2){
-				e2.printStackTrace();
+					if(rs != null) rs.close();
+					if(ps != null) ps.close();
+					if(connection != null) connection.close();
+			}catch(Exception e){
+					e.printStackTrace();
 			}
 		}
 	}
-	
 }
 
 	

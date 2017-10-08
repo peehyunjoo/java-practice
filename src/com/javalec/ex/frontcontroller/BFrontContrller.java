@@ -19,7 +19,7 @@ import com.javalec.ex.command.BWriteCommand;
 /**
  * Servlet implementation class BFrontContrller
  */
-@WebServlet("*.do")
+@WebServlet("list.do")
 public class BFrontContrller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,7 +51,7 @@ public class BFrontContrller extends HttpServlet {
 	
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException {
 		System.out.println("actionDo");
-		request.setCharacterEncoding("EUC-KR");
+		//request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
 		BCommand command = null;
 		
